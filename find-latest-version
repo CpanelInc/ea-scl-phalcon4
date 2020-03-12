@@ -47,8 +47,10 @@ sub _get_required {
     my $sha = substr( $tag->{'commit'}->{'sha'}, 0, 7 );
 
     $version = $tag->{'name'};
-    $name    = "phalcon-cphalcon-$sha.tar";
+    $name    = "phalcon-cphalcon-$version-0-g$sha.tar.gz";
     $url     = $tag->{'tarball_url'};
+
+    $version =~ s/^v//;
 
     return ( $version, $url, $name );
 }
