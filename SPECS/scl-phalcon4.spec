@@ -69,7 +69,7 @@ Conflicts:     %{?scl_prefix}php-phalcon
 Phalcon is an open source full stack framework for PHP, written as a C-extension. Phalcon is optimized for high performance. Its unique architecture allows the framework to always be memory resident, offering its functionality whenever its needed, without expensive file stats and file reads that traditional PHP frameworks employ.
 
 %prep
-%setup -n phalcon-cphalcon-b28b0a2
+%setup -n phalcon-cphalcon-d3e9463
 #### ^^^ [GitHub]
 
 %install
