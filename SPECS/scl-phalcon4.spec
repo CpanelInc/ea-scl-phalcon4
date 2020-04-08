@@ -35,7 +35,7 @@ Vendor:  cPanel, Inc.
 Summary: A full-stack PHP framework delivered as a C-extension
 Version: 4.0.5
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4572 for more details
-%define release_prefix 1
+%define release_prefix 2
 Release: %{release_prefix}%{?dist}.cpanel
 License: PHP
 Group:   Development/Languages
@@ -98,6 +98,9 @@ install %{SOURCE1} $RPM_BUILD_ROOT/%{_scl_root}/etc/php.d/90-phalcon.ini
 %config(noreplace) %attr(644,root,root) %{_scl_root}/etc/php.d/90-phalcon.ini
 
 %changelog
+* Mon Mar 30 2020 Julian Brown <julian.brown@cpanel.net> - 4.0.5-2
+- ZC-6246: Add support for ea-php74
+
 * Mon Mar 30 2020 Cory McIntire <cory@cpanel.net> - 4.0.5-1
 - EA-8949: Update scl-phalcon4 from v4.0.4 to v4.0.5
 
