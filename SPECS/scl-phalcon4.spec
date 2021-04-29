@@ -33,7 +33,7 @@
 Name:    %{?scl_prefix}php-phalcon4
 Vendor:  cPanel, Inc.
 Summary: A full-stack PHP framework delivered as a C-extension
-Version: 4.1.0
+Version: 4.1.2
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4572 for more details
 %define release_prefix 1
 Release: %{release_prefix}%{?dist}.cpanel
@@ -98,6 +98,9 @@ install %{SOURCE1} $RPM_BUILD_ROOT/%{_scl_root}/etc/php.d/90-phalcon.ini
 %config(noreplace) %attr(644,root,root) %{_scl_root}/etc/php.d/90-phalcon.ini
 
 %changelog
+* Thu Apr 29 2021 Travis Holloway <t.holloway@cpanel.net> - 4.1.2-1
+- EA-9736: Update scl-phalcon4 from v4.1.0 to v4.1.2
+
 * Tue Nov 03 2020 Cory McIntire <cory@cpanel.net> - 4.1.0-1
 - EA-9402: Update scl-phalcon4 from v4.0.6 to v4.1.0
 
