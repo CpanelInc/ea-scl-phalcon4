@@ -1,0 +1,46 @@
+#!/usr/local/cpanel/3rdparty/bin/perl
+# cpanel - ea4-tool-post-update                 Copyright(c) 2021 cPanel, L.L.C.
+#                                                           All rights Reserved.
+# copyright@cpanel.net                                         http://cpanel.net
+# This code is subject to the cPanel license. Unauthorized copying is prohibited
+
+package scl_phalcon4::ea4_tool_post_update;
+
+use strict;
+use warnings;
+
+use lib "../ea-tools/lib/ea4_tool";    # assumes ea-tools is checked out next to this repo
+use ea4_tool::util ();
+use File::chdir;
+use Path::Tiny;
+
+exit( run() ? 0 : 1 ) if !caller;
+
+sub run {
+    my ( $old_ver, $new_ver ) = @_;
+
+    my $spec    = ea4_tool::util::specfile($CWD);
+    my $tarball = ea4_tool::util::spec_get_main_tarball( $spec, $new_ver );
+
+    my @lines = path($spec)->lines;
+    foreach my $line (@lines) {
+        if ( $line =~ /^Source:/ ) {
+            $line = "Source: $tarball\n";
+        }
+    }
+
+    path($spec)->spew(@lines);
+
+    print "Committing SPEC file change …\n";
+    my $git    = ea4_tool::util::git($CWD);
+    my $branch = $git->current_branch();
+
+    $git->run( add    => $spec );
+    $git->run( commit => "-m", "$branch: ea4-tool-post-update update Source to new tarball $tarball" );
+    ea4_tool::util::push_to_upstream_or_origin( $git, $branch );
+
+    print "Done!\n";
+    return 1;
+}
+
+1;
