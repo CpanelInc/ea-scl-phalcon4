@@ -44,7 +44,7 @@ URL: https://phalconphp.com/
 #### https://fedoraproject.org/wiki/Packaging:SourceURL?rd=Packaging/SourceURL#Git_Hosting_Services
 #### Source: https://github.com/phalcon/cphalcon/archive/v%{version}.tar.gz
 #### does not work :(
-Source: phalcon-cphalcon-v4.1.0-0-g81561d8.tar.gz
+Source: phalcon-cphalcon-v4.1.2-0-gae581a3.tar.gz
 Source1: phalcon.ini
 BuildRequires: scl-utils-build
 BuildRequires: %{?scl_prefix}scldevel

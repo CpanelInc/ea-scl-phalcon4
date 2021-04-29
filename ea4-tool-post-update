@@ -14,13 +14,13 @@ use ea4_tool::util ();
 use File::chdir;
 use Path::Tiny;
 
-exit( run() ? 0 : 1 ) if !caller;
+exit( run(@ARGV) ? 0 : 1 ) if !caller;
 
 sub run {
     my ( $old_ver, $new_ver ) = @_;
 
     my $spec    = ea4_tool::util::specfile($CWD);
-    my $tarball = ea4_tool::util::spec_get_main_tarball( $spec, $new_ver );
+    my $tarball = get_tarball($new_ver);
 
     my @lines = path($spec)->lines;
     foreach my $line (@lines) {
@@ -41,6 +41,24 @@ sub run {
 
     print "Done!\n";
     return 1;
+}
+
+sub get_tarball {
+    my ($ver) = @_;
+
+    my @tarballs;
+    for my $ext (qw(.tgz tar.gz .tar.xz .tar.bz2 .gem)) {
+        push @tarballs, map { s{.*SOURCES/}{}; $_ } grep m/\D\Q$ver\E\D/, File::Glob::bsd_glob("SOURCES/*$ext");
+    }
+
+    if ( !@tarballs ) {
+        die "no tarballs w/ $ver in the name in SOURCES/\n";
+    }
+    elsif ( @tarballs > 1 ) {
+        warn "more than one tarball w/ $ver in the name in SOURCES/, doing best guess …\n";
+    }
+
+    return $tarballs[0];
 }
 
 1;
