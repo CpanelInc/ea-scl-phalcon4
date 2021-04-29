@@ -31,6 +31,13 @@ sub _get_required {
     my $tag;
 
     foreach my $tag_ref ( @{$tag_refs} ) {
+
+        # ignore release candidates, alpha, and beta releases
+        if ( $tag_ref->{name} =~ m{-(?:(?:rc)|(?:beta)|(?:alpha))} ) {
+            print "Non mergable update found:  $tag_ref->{name}\n";
+            next;
+        }
+
         if ( !defined $tag ) {
             $tag = $tag_ref;
             next;
