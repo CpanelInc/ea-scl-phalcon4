@@ -19,13 +19,17 @@ exit( run(@ARGV) ? 0 : 1 ) if !caller;
 sub run {
     my ( $old_ver, $new_ver ) = @_;
 
-    my $spec    = ea4_tool::util::specfile($CWD);
-    my $tarball = get_tarball($new_ver);
+    my $spec      = ea4_tool::util::specfile($CWD);
+    my $tarball   = get_tarball($new_ver);
+    my $setup_sum = get_setup_sum($tarball);
 
     my @lines = path($spec)->lines;
     foreach my $line (@lines) {
         if ( $line =~ /^Source:/ ) {
             $line = "Source: $tarball\n";
+        }
+        elsif ( $line =~ /^%setup -n phalcon-cphalcon-(\w+)\s*$/ ) {
+            $line = "%setup -n phalcon-cphalcon-$setup_sum\n";
         }
     }
 
@@ -59,6 +63,18 @@ sub get_tarball {
     }
 
     return $tarballs[0];
+}
+
+sub get_setup_sum {
+    my ($tarball) = @_;
+
+    my $setup_sum;
+    if ( $tarball =~ /-g(\w+)\.tar\.gz/ ) {
+        $setup_sum = $1;
+    }
+
+    die "Unable to find sum for setup\n" unless $setup_sum;
+    return $setup_sum;
 }
 
 1;
