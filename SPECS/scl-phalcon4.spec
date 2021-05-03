@@ -33,7 +33,7 @@
 Name:    %{?scl_prefix}php-phalcon4
 Vendor:  cPanel, Inc.
 Summary: A full-stack PHP framework delivered as a C-extension
-Version: 4.1.0
+Version: 4.1.2
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4572 for more details
 %define release_prefix 1
 Release: %{release_prefix}%{?dist}.cpanel
@@ -44,7 +44,7 @@ URL: https://phalconphp.com/
 #### https://fedoraproject.org/wiki/Packaging:SourceURL?rd=Packaging/SourceURL#Git_Hosting_Services
 #### Source: https://github.com/phalcon/cphalcon/archive/v%{version}.tar.gz
 #### does not work :(
-Source: phalcon-cphalcon-v4.1.0-0-g81561d8.tar.gz
+Source: phalcon-cphalcon-v4.1.2-0-gae581a3.tar.gz
 Source1: phalcon.ini
 BuildRequires: scl-utils-build
 BuildRequires: %{?scl_prefix}scldevel
@@ -69,7 +69,7 @@ Conflicts:     %{?scl_prefix}php-phalcon
 Phalcon is an open source full stack framework for PHP, written as a C-extension. Phalcon is optimized for high performance. Its unique architecture allows the framework to always be memory resident, offering its functionality whenever its needed, without expensive file stats and file reads that traditional PHP frameworks employ.
 
 %prep
-%setup -n phalcon-cphalcon-81561d8
+%setup -n phalcon-cphalcon-ae581a3
 #### ^^^ [GitHub]
 
 %install
@@ -98,6 +98,9 @@ install %{SOURCE1} $RPM_BUILD_ROOT/%{_scl_root}/etc/php.d/90-phalcon.ini
 %config(noreplace) %attr(644,root,root) %{_scl_root}/etc/php.d/90-phalcon.ini
 
 %changelog
+* Thu Apr 29 2021 Travis Holloway <t.holloway@cpanel.net> - 4.1.2-1
+- EA-9736: Update scl-phalcon4 from v4.1.0 to v4.1.2
+
 * Tue Nov 03 2020 Cory McIntire <cory@cpanel.net> - 4.1.0-1
 - EA-9402: Update scl-phalcon4 from v4.0.6 to v4.1.0
 
