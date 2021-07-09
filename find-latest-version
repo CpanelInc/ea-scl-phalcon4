@@ -32,8 +32,11 @@ sub _get_required {
 
     foreach my $tag_ref ( @{$tag_refs} ) {
 
+        # Since this package is phalcon4, we should not update to v5
+        next unless ( $tag_ref->{name} =~ m{^v4\.} );
+
         # ignore release candidates, alpha, and beta releases
-        next if ( $tag_ref->{name} =~ m{-(?:(?:rc)|(?:beta)|(?:alpha))} );
+        next if ( $tag_ref->{name} =~ m{(?:(?:rc)|(?:beta)|(?:alpha))} );
 
         if ( !defined $tag ) {
             $tag = $tag_ref;
