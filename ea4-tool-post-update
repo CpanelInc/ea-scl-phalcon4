@@ -41,7 +41,7 @@ sub run {
 
     $git->run( add    => $spec );
     $git->run( commit => "-m", "$branch: ea4-tool-post-update update Source to new tarball $tarball" );
-    ea4_tool::util::push_to_upstream_or_origin( $git, $branch );
+    ea4_tool::util::pushup( $git, $branch );
 
     print "Done!\n";
     return 1;
