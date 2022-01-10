@@ -44,7 +44,7 @@ URL: https://phalconphp.com/
 #### https://fedoraproject.org/wiki/Packaging:SourceURL?rd=Packaging/SourceURL#Git_Hosting_Services
 #### Source: https://github.com/phalcon/cphalcon/archive/v%{version}.tar.gz
 #### does not work :(
-Source: phalcon-cphalcon-v4.1.2-0-gae581a3.tar.gz
+Source: phalcon-cphalcon-v4.1.3-0-g0775c80.tar.gz
 Source1: phalcon.ini
 BuildRequires: scl-utils-build
 BuildRequires: %{?scl_prefix}scldevel
@@ -69,7 +69,7 @@ Conflicts:     %{?scl_prefix}php-phalcon
 Phalcon is an open source full stack framework for PHP, written as a C-extension. Phalcon is optimized for high performance. Its unique architecture allows the framework to always be memory resident, offering its functionality whenever its needed, without expensive file stats and file reads that traditional PHP frameworks employ.
 
 %prep
-%setup -n phalcon-cphalcon-ae581a3
+%setup -n phalcon-cphalcon-0775c80
 #### ^^^ [GitHub]
 
 %install
