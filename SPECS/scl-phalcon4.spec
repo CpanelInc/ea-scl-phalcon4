@@ -1,5 +1,3 @@
-%define debug_package %{nil}
-
 %{?scl:%global _scl_prefix /opt/cpanel}
 %{!?scl:%global pkg_name %{name}}
 
@@ -35,7 +33,7 @@ Vendor:  cPanel, Inc.
 Summary: A full-stack PHP framework delivered as a C-extension
 Version: 4.1.3
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4572 for more details
-%define release_prefix 1
+%define release_prefix 2
 Release: %{release_prefix}%{?dist}.cpanel
 License: PHP
 Group:   Development/Languages
@@ -98,6 +96,9 @@ install %{SOURCE1} $RPM_BUILD_ROOT/%{_scl_root}/etc/php.d/90-phalcon.ini
 %config(noreplace) %attr(644,root,root) %{_scl_root}/etc/php.d/90-phalcon.ini
 
 %changelog
+* Wed May 10 2023 Brian Mendoza <brian.mendoza@cpanel.net> - 4.1.3-2
+- ZC-10936: Clean up Makefile and remove debug-package-nil
+
 * Mon Jan 10 2022 Cory McIntire <cory@cpanel.net> - 4.1.3-1
 - EA-10413: Update scl-phalcon4 from v4.1.2 to v4.1.3
 
