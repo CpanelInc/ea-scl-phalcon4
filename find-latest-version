@@ -25,7 +25,7 @@ sub _get_required {
 
     my $res = $http->get("https://api.github.com/repos/phalcon/cphalcon/tags");
 
-    my $tag_refs = ea4_tool::util::json2ref( $res->content );
+    my $tag_refs = ea4_tool::util::json2ref( $res->{content} );
     my $tag;
 
     foreach my $tag_ref ( @{$tag_refs} ) {
