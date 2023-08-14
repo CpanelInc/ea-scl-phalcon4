@@ -9,8 +9,6 @@ package ea_repo_name_goes_here::find_latest_version;
 use strict;
 use warnings;
 
-use Cpanel::JSON::XS;
-
 use lib "../ea-tools/lib/ea4_tool";    # assumes ea-tools is checked out next to this repo
 use ea4_tool::util ();
 
@@ -27,7 +25,7 @@ sub _get_required {
 
     my $res = $http->get("https://api.github.com/repos/phalcon/cphalcon/tags");
 
-    my $tag_refs = Cpanel::JSON::Load( $res->content );
+    my $tag_refs = ea4_tool::util::json2ref( $res->{content} );
     my $tag;
 
     foreach my $tag_ref ( @{$tag_refs} ) {
